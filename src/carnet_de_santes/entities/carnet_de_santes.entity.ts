@@ -4,8 +4,8 @@ import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 export class CarnetDeSante extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column({ type: 'varchar' })
-  poids: string;
+  @Column('numeric')
+  poids: number;
   @Column({ type: 'varchar' })
   vaccin: string;
   @Column({ type: 'varchar' })

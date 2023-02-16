@@ -1,11 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateCarnetDeSanteDto {
   @ApiProperty()
   @IsNotEmpty()
-  @IsString()
-  poids: string;
+  @IsNumber()
+  poids: number;
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
