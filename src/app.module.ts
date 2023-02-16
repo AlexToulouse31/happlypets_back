@@ -6,6 +6,13 @@ import { AppService } from './app.service';
 import { Habitat } from './habitats/entities/habitat.entity';
 import { HabitatsModule } from './habitats/habitats.module';
 import { AlimentationsModule } from './alimentations/alimentations.module';
+import { AuthModule } from './auth/auth.module';
+import { SoinModule } from './soin/soin.module';
+import { PhotoModule } from './photo/photo.module';
+import { Photo } from './photo/entities/photo.entity';
+import { Soin } from './soin/entities/soin.entity';
+import { CarnetDeSanteModule } from './carnet_de_sante/carnet_de_sante.module';
+import { CarnetDeSante } from './carnet_de_sante/entities/carnet_de_sante.entity';
 
 @Module({
   imports: [
@@ -19,13 +26,16 @@ import { AlimentationsModule } from './alimentations/alimentations.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Habitat],
+      entities: [Habitat, Photo, Soin, CarnetDeSante],
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
     }),
     HabitatsModule,
     AlimentationsModule,
+    SoinModule,
+    PhotoModule,
+    CarnetDeSanteModule,
   ],
   controllers: [AppController],
   providers: [AppService],
