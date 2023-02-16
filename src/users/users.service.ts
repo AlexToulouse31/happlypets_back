@@ -5,7 +5,13 @@ import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly) { }
+  deletedUser(id: any) {
+    throw new Error('Method not implemented.');
+  }
+  findUserByID(id: any) {
+    throw new Error('Method not implemented.');
+  }
+
   async create(createUserDto: CreateUserDto, hash: string) {
 
     const address = createUserDto.adresse;
@@ -67,5 +73,4 @@ export class UsersService {
 
     return await User.findOneBy({ id: id });
   }
-
 }
