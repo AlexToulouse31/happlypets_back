@@ -3,7 +3,9 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
+import { Habitat } from './habitats/entities/habitat.entity';
+import { HabitatsModule } from './habitats/habitats.module';
+import { AlimentationsModule } from './alimentations/alimentations.module';
 
 @Module({
   imports: [
@@ -17,10 +19,13 @@ import { AuthModule } from './auth/auth.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: ['dist/**/*.entity{ .ts,.js}'],
+      entities: [Habitat],
+      autoLoadEntities: true,
       synchronize: true,
-      logging: false,
+      logging: true,
     }),
+    HabitatsModule,
+    AlimentationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
