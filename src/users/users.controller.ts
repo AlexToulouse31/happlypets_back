@@ -16,6 +16,7 @@ import * as bcrypt from 'bcrypt';
 //import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
 
 @ApiTags('users')
 @Controller('users')
@@ -28,7 +29,7 @@ export class UsersController {
     const saltOrRounds = 10;
 
     const isPseudoExist = await this.usersService.findOneByPseudo(
-      createUserDto.pseudo,
+      createUserDto.username,
     );
     if (isPseudoExist)
       throw new ConflictException(

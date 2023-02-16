@@ -6,4 +6,4 @@ import { SoinController } from './soins.controller';
   controllers: [SoinController],
   providers: [SoinService],
 })
-export class SoinModule {}
+export class SoinsModule {}

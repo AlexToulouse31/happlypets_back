@@ -6,14 +6,10 @@ import { User } from './entities/user.entity';
 @Injectable()
 export class UsersService {
   async create(createUserDto: CreateUserDto, hash: string) {
-    const address = createUserDto.adresse;
-    const city = createUserDto.ville;
-    const country = createUserDto.departement;
-
     const newUser = new User();
     newUser.prenom = createUserDto.prenom;
     newUser.nom = createUserDto.nom;
-    newUser.pseudo = createUserDto.pseudo;
+    newUser.username = createUserDto.username;
     newUser.email = createUserDto.email;
     newUser.password = hash;
     newUser.adresse = createUserDto.adresse;
@@ -30,8 +26,8 @@ export class UsersService {
     return users;
   }
 
-  async findOneByPseudo(pseudo: string) {
-    const user = await User.findOne({ where: { pseudo: pseudo } });
+  async findOneByPseudo(username: string) {
+    const user = await User.findOne({ where: { username: username } });
 
     return user;
   }
@@ -56,7 +52,7 @@ export class UsersService {
     const newUser = await User.findOneBy({
       id: id,
     });
-    newUser.pseudo = updateUserDto.pseudo;
+    newUser.username = updateUserDto.username;
     newUser.adresse = updateUserDto.adresse;
     newUser.ville = updateUserDto.ville;
     newUser.departement = updateUserDto.departement;
