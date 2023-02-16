@@ -6,15 +6,16 @@ import { AppService } from './app.service';
 import { Habitat } from './habitats/entities/habitat.entity';
 import { HabitatsModule } from './habitats/habitats.module';
 import { AlimentationsModule } from './alimentations/alimentations.module';
-import { AnimalModule } from './animal/animal.module';
+import { AuthModule } from './auth/auth.module';
+import { User } from './users/entities/user.entity';
+import { CarnetDeSante } from './carnet_de_santes/entities/carnet_de_santes.entity';
+import { Soin } from './soins/entities/soins.entity';
+import { Photo } from './photos/entities/photos.entity';
+import { SoinModule } from './soins/soins.module';
+import { PhotoModule } from './photos/photos.module';
+import { CarnetDeSanteModule } from './carnet_de_santes/carnet_de_santes.module';
 import { UsersModule } from './users/users.module';
-import { SoinModule } from './soin/soin.module';
-import { PhotoModule } from './photo/photo.module';
-import { Photo } from './photo/entities/photo.entity';
-import { Soin } from './soin/entities/soin.entity';
-import { CarnetDeSanteModule } from './carnet_de_sante/carnet_de_sante.module';
-import { CarnetDeSante } from './carnet_de_sante/entities/carnet_de_sante.entity';
-import { Animal } from './animal/entities/animal.entity';
+import { Alimentation } from './alimentations/entities/alimentation.entity';
 
 @Module({
   imports: [
@@ -28,17 +29,18 @@ import { Animal } from './animal/entities/animal.entity';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Habitat, Photo, Soin, CarnetDeSante],
+      entities: [Habitat, Photo, Soin, CarnetDeSante, User, Alimentation],
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
     }),
-    UsersModule,
     HabitatsModule,
     AlimentationsModule,
     SoinModule,
     PhotoModule,
     CarnetDeSanteModule,
+    AnimalModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

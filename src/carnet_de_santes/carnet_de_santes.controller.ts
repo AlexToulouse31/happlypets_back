@@ -11,9 +11,9 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { EStatus } from 'src/constants/enum';
-import { CarnetDeSanteService } from './carnet_de_sante.service';
-import { CreateCarnetDeSanteDto } from './dto/create-carnet_de_sante.dto';
-import { UpdateCarnetDeSanteDto } from './dto/update-carnet_de_sante.dto';
+import { CarnetDeSanteService } from './carnet_de_santes.service';
+import { CreateCarnetDeSanteDto } from './dto/create-carnet_de_santes.dto';
+import { UpdateCarnetDeSanteDto } from './dto/update-carnet_de_santes.dto';
 @ApiTags('carnet')
 @Controller('carnet')
 export class CarnetDeSanteController {
@@ -34,13 +34,21 @@ export class CarnetDeSanteController {
     const create = await this.carnetDeSanteService.createCarnet(
       createCarnetDeSanteDto,
     );
-    return create;
+    return {
+      status: EStatus.OK,
+      message: 'Le vaccin a été ajouté',
+      data: create,
+    };
   }
   /* @ApiBearerAuth()
   @UseGuards() */
   @Get()
   async findAllCarnet() {
     const findAllCarnet = await this.carnetDeSanteService.findAllCarnet();
+
+    if (findAllCarnet == undefined) {
+      throw new NotFoundException('Pas de données dans le carnet de santé');
+    }
     return {
       status: EStatus.OK,
       message: `Voici tous les vaccins enregistrés`,

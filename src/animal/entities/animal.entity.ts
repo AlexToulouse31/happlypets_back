@@ -1,4 +1,10 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  DeleteDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Animal extends BaseEntity {
@@ -25,4 +31,7 @@ export class Animal extends BaseEntity {
 
   @Column({ type: 'boolean', default: false })
   lof: boolean;
+
+  @DeleteDateColumn()
+  deletedAt?: Date;
 }

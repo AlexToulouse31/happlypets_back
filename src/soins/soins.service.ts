@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSoinDto } from './dto/create-soin.dto';
-import { UpdateSoinDto } from './dto/update-soin.dto';
-import { Soin } from './entities/soin.entity';
+import { CreateSoinDto } from './dto/create-soins.dto';
+import { UpdateSoinDto } from './dto/update-soins.dto';
+import { Soin } from './entities/soins.entity';
 
 @Injectable()
 export class SoinService {
