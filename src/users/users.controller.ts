@@ -4,7 +4,6 @@ import {
   Body,
   UseInterceptors,
   ClassSerializerInterceptor,
-  UseGuards,
   Patch,
   Request,
   ConflictException,
@@ -13,7 +12,6 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
-//import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
