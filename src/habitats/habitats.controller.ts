@@ -6,12 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { HabitatsService } from './habitats.service';
 import { CreateHabitatDto } from './dto/create-habitat.dto';
 import { UpdateHabitatDto } from './dto/update-habitat.dto';
 import { Habitat } from './entities/habitat.entity';
 import { EMessageStatus, EStatus } from 'src/constants/enum';
+import { NotFoundException } from '@nestjs/common';
 
 @Controller('habitats')
 export class HabitatsController {
@@ -28,7 +30,13 @@ export class HabitatsController {
         message: EMessageStatus.x2,
       };
     }
-    return await this.habitatsService.create(createHabitatDto);
+    const dataCreated = await this.habitatsService.create(createHabitatDto);
+
+    return {
+      status: EStatus.OK,
+      message: EMessageStatus.dataOK,
+      data: dataCreated,
+    };
   }
 
   @Get()
@@ -38,7 +46,7 @@ export class HabitatsController {
     if (!data[0]) {
       return {
         status: EStatus.FAIL,
-        message: EMessageStatus.dataKO,
+        message: EMessageStatus.NoData,
       };
     }
     return {
@@ -49,13 +57,10 @@ export class HabitatsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    const data = await this.habitatsService.findOne(+id);
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const data = await this.habitatsService.findOne(id);
     if (!data) {
-      return {
-        status: EStatus.FAIL,
-        message: EMessageStatus.Unknown,
-      };
+      throw new NotFoundException(EMessageStatus.Unknown);
     }
     return {
       status: EStatus.OK,
@@ -66,18 +71,15 @@ export class HabitatsController {
 
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateHabitatDto: UpdateHabitatDto,
   ) {
     const dataIdCheck = await this.habitatsService.findOne(+id);
 
     if (!dataIdCheck) {
-      return {
-        status: EStatus.FAIL,
-        message: EMessageStatus.Unknown,
-      };
+      throw new NotFoundException(EMessageStatus.Unknown);
     }
-
+    0.0;
     const dataToUpdated = await this.habitatsService.update(
       +id,
       updateHabitatDto,
@@ -97,14 +99,11 @@ export class HabitatsController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id', ParseIntPipe) id: number) {
     const dataToDelete = await this.habitatsService.findOne(+id);
 
     if (!dataToDelete) {
-      return {
-        status: EStatus.FAIL,
-        message: EMessageStatus.Unknown,
-      };
+      throw new NotFoundException(EMessageStatus.Unknown);
     }
     const dataDeleted = await this.habitatsService.remove(dataToDelete);
 
