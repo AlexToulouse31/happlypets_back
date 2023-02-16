@@ -5,9 +5,7 @@ import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly) { }
   async create(createUserDto: CreateUserDto, hash: string) {
-
     const address = createUserDto.adresse;
     const city = createUserDto.ville;
     const country = createUserDto.departement;
@@ -67,5 +65,4 @@ export class UsersService {
 
     return await User.findOneBy({ id: id });
   }
-
 }
