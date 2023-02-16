@@ -9,9 +9,9 @@ import {
   ParseIntPipe,
   NotFoundException,
 } from '@nestjs/common';
-import { SoinService } from './soin.service';
-import { CreateSoinDto } from './dto/create-soin.dto';
-import { UpdateSoinDto } from './dto/update-soin.dto';
+import { SoinService } from './soins.service';
+import { CreateSoinDto } from './dto/create-soins.dto';
+import { UpdateSoinDto } from './dto/update-soins.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { EStatus } from 'src/constants/enum';
 @ApiTags('soin')
@@ -51,6 +51,9 @@ export class SoinController {
   @Get(':id')
   async soinfindOne(@Param('id', ParseIntPipe) id: number) {
     const findOneSoin = await this.soinService.findOneSoin(id);
+    if (!findOneSoin) {
+      throw new NotFoundException('Pas de soin existant');
+    }
     return {
       status: EStatus.OK,
       message: `Voici l activité selectionnée`,

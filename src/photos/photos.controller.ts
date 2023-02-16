@@ -10,9 +10,9 @@ import {
   ParseIntPipe,
   NotFoundException,
 } from '@nestjs/common';
-import { PhotoService } from './photo.service';
-import { CreatePhotoDto } from './dto/create-photo.dto';
-import { UpdatePhotoDto } from './dto/update-photo.dto';
+import { PhotoService } from './photos.service';
+import { CreatePhotoDto } from './dto/create-photos.dto';
+import { UpdatePhotoDto } from './dto/update-photos.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { EStatus } from 'src/constants/enum';
 @ApiTags('photo')

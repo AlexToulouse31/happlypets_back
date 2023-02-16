@@ -1,14 +1,14 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsBoolean, IsOptional, IsString } from 'class-validator';
-import { CreateCarnetDeSanteDto } from './create-carnet_de_sante.dto';
+import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
+import { CreateCarnetDeSanteDto } from './create-carnet_de_santes.dto';
 
 export class UpdateCarnetDeSanteDto extends PartialType(
   CreateCarnetDeSanteDto,
 ) {
   @ApiProperty()
   @IsOptional()
-  @IsString()
-  poids: string;
+  @IsNumber()
+  poids: number;
   @ApiProperty()
   @IsOptional()
   @IsString()

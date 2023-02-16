@@ -17,7 +17,7 @@ import * as bcrypt from 'bcrypt';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Users')
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -62,7 +62,7 @@ export class UsersController {
     return users;
   }
 
-  //@UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @Patch()
   @UseInterceptors(ClassSerializerInterceptor)
   async update(@Body() updateUserDto: UpdateUserDto, @Request() req) {
