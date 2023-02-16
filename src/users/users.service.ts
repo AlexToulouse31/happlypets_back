@@ -5,7 +5,6 @@ import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-<<<<<<< HEAD
   deletedUser(id: any) {
     throw new Error('Method not implemented.');
   }
@@ -13,12 +12,7 @@ export class UsersService {
     throw new Error('Method not implemented.');
   }
 
-=======
->>>>>>> 5105a9c2356b018ed1b5e23e1746f53b9cf9aff5
   async create(createUserDto: CreateUserDto, hash: string) {
-    const address = createUserDto.adresse;
-    const city = createUserDto.ville;
-    const country = createUserDto.departement;
 
     const newUser = new User();
     newUser.prenom = createUserDto.prenom;
@@ -75,8 +69,4 @@ export class UsersService {
 
     return await User.findOneBy({ id: id });
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 5105a9c2356b018ed1b5e23e1746f53b9cf9aff5

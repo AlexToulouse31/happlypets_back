@@ -1,22 +1,7 @@
-import {
-  Controller,
-  Post,
-  Body,
-  UseInterceptors,
-  ClassSerializerInterceptor,
-  UseGuards,
-  Patch,
-  Request,
-  ConflictException,
-  Get,
-} from '@nestjs/common';
+import { Controller, Post, Body, UseInterceptors, ClassSerializerInterceptor, Patch, Request, ConflictException, Get } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
-<<<<<<< HEAD
-=======
-//import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
->>>>>>> 5105a9c2356b018ed1b5e23e1746f53b9cf9aff5
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
@@ -24,7 +9,7 @@ import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Post('register')
   @UseInterceptors(ClassSerializerInterceptor)
