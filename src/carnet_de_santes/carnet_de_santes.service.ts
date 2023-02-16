@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCarnetDeSanteDto } from './dto/create-carnet_de_sante.dto';
-import { UpdateCarnetDeSanteDto } from './dto/update-carnet_de_sante.dto';
-import { CarnetDeSante } from './entities/carnet_de_sante.entity';
+import { CreateCarnetDeSanteDto } from './dto/create-carnet_de_santes.dto';
+import { UpdateCarnetDeSanteDto } from './dto/update-carnet_de_santes.dto';
+import { CarnetDeSante } from './entities/carnet_de_santes.entity';
 
 @Injectable()
 export class CarnetDeSanteService {
