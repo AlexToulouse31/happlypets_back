@@ -11,10 +11,12 @@ import {
   Res,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AnimalService } from './animal.service';
 import { CreateAnimalDto } from './dto/create-animal.dto';
 import { UpdateAnimalDto } from './dto/update-animal.dto';
 
+@UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 @ApiTags('animal')
 @Controller('animal')

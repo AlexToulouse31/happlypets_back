@@ -9,15 +9,20 @@ import {
   ParseIntPipe,
   NotFoundException,
   UseInterceptors,
+  UseGuards,
 } from '@nestjs/common';
 import { FournisseursService } from './fournisseurs.service';
 import { CreateFournisseurDto } from './dto/create-fournisseurs.dto';
 import { UpdateFournisseurDto } from './dto/update-fournisseurs.dto';
 import { EStatus } from 'src/constants/enum';
 import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
-import { ApiBearerAuth } from '@nestjs/swagger';
-@UseInterceptors(ExcludeNullInterceptor)
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+
+//@UseInterceptors(ExcludeNullInterceptor)
+@UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
+@ApiTags('fournisseurs')
 @Controller('fournisseurs')
 export class FournisseursController {
   constructor(private readonly fournisseursService: FournisseursService) {}

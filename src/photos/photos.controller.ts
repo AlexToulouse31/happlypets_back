@@ -17,6 +17,9 @@ import { UpdatePhotoDto } from './dto/update-photos.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { EStatus } from 'src/constants/enum';
 import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+
+@UseGuards(JwtAuthGuard)
 @ApiTags('photo')
 @Controller('photo')
 @ApiBearerAuth()

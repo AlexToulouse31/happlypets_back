@@ -18,7 +18,8 @@ import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
 import { CarnetDeSanteService } from './carnet_de_santes.service';
 import { CreateCarnetDeSanteDto } from './dto/create-carnet_de_santes.dto';
 import { UpdateCarnetDeSanteDto } from './dto/update-carnet_de_santes.dto';
-@UseInterceptors(ExcludeNullInterceptor)
+
+//@UseInterceptors(ExcludeNullInterceptor)
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 @ApiTags('carnet')

@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { HabitatsService } from './habitats.service';
 import { CreateHabitatDto } from './dto/create-habitat.dto';
@@ -15,6 +16,9 @@ import { Habitat } from './entities/habitat.entity';
 import { EMessageStatus, EStatus } from 'src/constants/enum';
 import { NotFoundException } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+
+@UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 @ApiTags('habitats')
 @Controller('habitats')
