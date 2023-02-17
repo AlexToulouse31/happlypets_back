@@ -6,9 +6,9 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly usersService: UsersService,
-    private readonly jwtService: JwtService,
-  ) {}
+    private usersService: UsersService,
+    private jwtService: JwtService,
+  ) { }
 
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.usersService.findOneByPseudo(username);
@@ -25,11 +25,7 @@ export class AuthService {
     const payload = { username: user.pseudo, sub: user.id };
 
     return {
-      statusCode: 200,
-      message: 'Connection réussie',
-      data: {
-        access_token: this.jwtService.sign(payload),
-      },
+      access_token: this.jwtService.sign(payload),
     };
   }
 }
