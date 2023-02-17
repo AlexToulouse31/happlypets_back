@@ -6,14 +6,15 @@ import { Habitat } from './entities/habitat.entity';
 
 @Injectable()
 export class HabitatsService {
-  async create(@Body() createHabitatDto: CreateHabitatDto) {
+  async create(
+    @Body() createHabitatDto: CreateHabitatDto,
+  ): Promise<Habitat | undefined> {
     const data = new Habitat();
     data.type_Habitat = createHabitatDto.type_Habitat;
     data.geocode_lat = createHabitatDto.geocode_lat;
     data.geocode_lon = createHabitatDto.geocode_lon;
 
     const newHabitat = await Habitat.save(data);
-    console.log(newHabitat);
 
     return newHabitat;
   }

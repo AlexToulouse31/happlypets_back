@@ -21,7 +21,7 @@ export enum EMessageStatus {
 
   dataOK = 'Donnée.s trouvée.s !!',
 
-  dataKO = 'Donnée.s introuvable.s !!!',
+  NoData = 'Aucune Donnée !!!',
 
   updateOK = 'Modification réussie !!',
 
