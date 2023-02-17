@@ -8,12 +8,17 @@ export class PhotoService {
   async createPhoto(createPhotoDto: CreatePhotoDto) {
     const photo = new Photo();
     photo.url = createPhotoDto.url;
+    photo.animal = createPhotoDto.animal;
     await Photo.save(photo);
     return photo;
   }
 
   async findAllPhoto(): Promise<Photo[] | undefined> {
-    const photoAll = await Photo.find();
+    const photoAll = await Photo.find({
+      relations: {
+        //animal : true
+      },
+    });
     if (photoAll[0]) {
       return photoAll;
     }

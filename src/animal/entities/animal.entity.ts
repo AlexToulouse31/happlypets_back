@@ -46,14 +46,14 @@ export class Animal extends BaseEntity {
   @JoinTable()
   alimentation: Alimentation[];
 
-  @OneToMany(() => Soin, (soin) => soin.animal)
-  soins: Soin[];
+  @OneToMany(() => Soin, (soin) => soin.id)
+  soins: number[];
 
-  @ManyToOne(() => User, (user) => user.animal)
+  @ManyToOne(() => User, (user) => user.id, { eager: true })
   user: number;
 
-  @ManyToOne(() => Habitat, (habitat) => habitat.animal)
-  habitat: Habitat;
+  @ManyToOne(() => Habitat, (habitat) => habitat.id)
+  habitat: number;
 
   @OneToMany(() => Photo, (photo) => photo.animal)
   photos: Photo[];
