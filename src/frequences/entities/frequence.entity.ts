@@ -8,18 +8,11 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class CarnetDeSante extends BaseEntity {
+export class Frequence extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column('numeric')
-  poids: number;
   @Column({ type: 'varchar' })
-  vaccin: string;
-  @Column({ type: 'varchar' })
-  date_vaccin: string;
-  @Column({ select: false })
-  steriliser: boolean;
-
-  @OneToMany(() => RendezVous, (rendezVous) => rendezVous.carnetDeSante)
+  periodicite: string;
+  @OneToMany(() => RendezVous, (rendezVous) => rendezVous.frequence)
   rendezVous: RendezVous[];
 }

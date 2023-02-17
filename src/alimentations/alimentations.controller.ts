@@ -1,4 +1,4 @@
-import { NotFoundException, ParseIntPipe } from '@nestjs/common';
+import { NotFoundException, ParseIntPipe, UseGuards } from '@nestjs/common';
 import {
   Controller,
   Get,
@@ -9,11 +9,14 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { EMessageStatus, EStatus } from 'src/constants/enum';
 import { AlimentationsService } from './alimentations.service';
 import { CreateAlimentationDto } from './dto/create-alimentation.dto';
 import { UpdateAlimentationDto } from './dto/update-alimentation.dto';
 import { Alimentation } from './entities/alimentation.entity';
+
+@UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 @ApiTags('alimentations')
 @Controller('alimentations')

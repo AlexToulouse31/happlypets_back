@@ -17,13 +17,16 @@ import { UpdatePhotoDto } from './dto/update-photos.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { EStatus } from 'src/constants/enum';
 import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+
+@UseGuards(JwtAuthGuard)
 @ApiTags('photo')
 @Controller('photo')
 @ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 export class PhotoController {
   constructor(private readonly photoService: PhotoService) {}
-  /* @ApiBearerAuth()
-  @UseGuards() */
+
   @UseInterceptors(ExcludeNullInterceptor)
   @Post()
   async createPhoto(@Body() createPhotoDto: CreatePhotoDto) {
@@ -37,8 +40,7 @@ export class PhotoController {
     }
     return await this.photoService.createPhoto(createPhotoDto);
   }
-  /*  @ApiBearerAuth()
-  @UseGuards() */
+
   @Get()
   async findAllPhoto() {
     const photoAllFind = await this.photoService.findAllPhoto();
@@ -48,8 +50,7 @@ export class PhotoController {
       data: photoAllFind,
     };
   }
-  /*  @ApiBearerAuth()
-  @UseGuards() */
+
   @Get(':id')
   async photofindOne(@Param('id', ParseIntPipe) id: number) {
     const findOnePhoto = await this.photoService.findOnePhoto(id);
@@ -59,8 +60,7 @@ export class PhotoController {
       data: findOnePhoto,
     };
   }
-  /* @ApiBearerAuth()
-  @UseGuards() */
+
   @Patch(':id')
   async updatePhoto(
     @Param('id', ParseIntPipe) id: number,
@@ -76,8 +76,7 @@ export class PhotoController {
       data: photoUpdated,
     };
   }
-  /* @ApiBearerAuth()
-  @UseGuards() */
+
   @Delete(':id')
   async remove(@Param('id', ParseIntPipe) id: number) {
     const data = await this.photoService.findOnePhoto(id);

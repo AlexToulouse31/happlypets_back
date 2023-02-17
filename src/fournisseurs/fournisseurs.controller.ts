@@ -9,20 +9,23 @@ import {
   ParseIntPipe,
   NotFoundException,
   UseInterceptors,
+  UseGuards,
 } from '@nestjs/common';
 import { FournisseursService } from './fournisseurs.service';
 import { CreateFournisseurDto } from './dto/create-fournisseurs.dto';
 import { UpdateFournisseurDto } from './dto/update-fournisseurs.dto';
 import { EStatus } from 'src/constants/enum';
 import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 @UseInterceptors(ExcludeNullInterceptor)
 @ApiBearerAuth()
+@ApiTags('fournisseurs')
 @Controller('fournisseurs')
+@UseGuards(JwtAuthGuard)
 export class FournisseursController {
   constructor(private readonly fournisseursService: FournisseursService) {}
-  /* @ApiBearerAuth()
-  @UseGuards() */
+
   @Post()
   async createFournisseur(@Body() createFournisseurDto: CreateFournisseurDto) {
     const verifFournisseur = await this.fournisseursService.findOneNom(
@@ -39,8 +42,7 @@ export class FournisseursController {
     );
     return create;
   }
-  /* @ApiBearerAuth()
-  @UseGuards() */
+
   @Get()
   async findAllFournisseur() {
     const fournisseurAllFind =
@@ -51,8 +53,7 @@ export class FournisseursController {
       data: fournisseurAllFind,
     };
   }
-  /* @ApiBearerAuth()
-  @UseGuards() */
+
   @Get(':id')
   async fournisseurfindOne(@Param('id', ParseIntPipe) id: number) {
     const findOneFournisseur =
@@ -66,8 +67,7 @@ export class FournisseursController {
       data: findOneFournisseur,
     };
   }
-  /* @ApiBearerAuth()
-  @UseGuards() */
+
   @Patch(':id')
   async updateFournisseur(
     @Param('id', ParseIntPipe) id: number,
@@ -83,8 +83,7 @@ export class FournisseursController {
       data: fournisseurUpdated,
     };
   }
-  /* @ApiBearerAuth()
-  @UseGuards() */
+
   @Delete(':id')
   async removeFournisseur(@Param('id', ParseIntPipe) id: number) {
     const data = await this.fournisseursService.findOneFournisseur(id);
