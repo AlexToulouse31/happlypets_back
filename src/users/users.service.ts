@@ -9,7 +9,7 @@ export class UsersService {
     const newUser = new User();
     newUser.prenom = createUserDto.prenom;
     newUser.nom = createUserDto.nom;
-    newUser.username = createUserDto.username;
+    newUser.username = createUserDto.pseudo;
     newUser.email = createUserDto.email;
     newUser.password = hash;
     newUser.adresse = createUserDto.adresse;

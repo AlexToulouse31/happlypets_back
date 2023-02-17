@@ -42,5 +42,6 @@ export class CreateUserDto {
     @IsString()
     @IsNotEmpty()
     departement: string;
+    username: string;
 
 }
