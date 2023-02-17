@@ -8,12 +8,10 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  DeleteDateColumn,
   ManyToMany,
   JoinTable,
   ManyToOne,
   OneToMany,
-  JoinColumn,
 } from 'typeorm';
 
 @Entity()
