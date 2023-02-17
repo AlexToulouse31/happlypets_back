@@ -23,6 +23,7 @@ import { UsersModule } from './users/users.module';
 import { RendezVousModule } from './rendez_vous/rendez_vous.module';
 import { Frequence } from './frequences/entities/frequence.entity';
 import { FrequencesModule } from './frequences/frequences.module';
+import { RendezVous } from './rendez_vous/entities/rendez_vous.entity';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { FrequencesModule } from './frequences/frequences.module';
         Animal,
         Fournisseur,
         Frequence,
+        RendezVous,
       ],
       autoLoadEntities: true,
       synchronize: true,

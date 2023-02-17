@@ -1,3 +1,4 @@
+import { RendezVous } from 'src/rendez_vous/entities/rendez_vous.entity';
 import {
   BaseEntity,
   Column,
@@ -12,4 +13,6 @@ export class Frequence extends BaseEntity {
   id: number;
   @Column({ type: 'varchar' })
   periodicite: string;
+  @OneToMany(() => RendezVous, (rendezVous) => rendezVous.frequence)
+  rendezVous: RendezVous[];
 }
