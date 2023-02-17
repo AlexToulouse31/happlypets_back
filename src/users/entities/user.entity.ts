@@ -1,9 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
+import { Animal } from 'src/animal/entities/animal.entity';
 import {
   BaseEntity,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
@@ -47,4 +49,7 @@ export class User extends BaseEntity {
   @ApiProperty()
   @Column({ type: 'varchar' })
   departement: string;
+
+  @OneToMany(() => Animal, (animal) => animal.user)
+  animal: Animal;
 }

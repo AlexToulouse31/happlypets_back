@@ -20,8 +20,9 @@ import { Soin } from './soins/entities/soins.entity';
 import { SoinsModule } from './soins/soins.module';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
-import { RappelsModule } from './rappels/rappels.module';
 import { RendezVousModule } from './rendez_vous/rendez_vous.module';
+import { Frequence } from './frequences/entities/frequence.entity';
+import { FrequencesModule } from './frequences/frequences.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { RendezVousModule } from './rendez_vous/rendez_vous.module';
         Alimentation,
         Animal,
         Fournisseur,
+        Frequence,
       ],
       autoLoadEntities: true,
       synchronize: true,
@@ -59,8 +61,8 @@ import { RendezVousModule } from './rendez_vous/rendez_vous.module';
     AnimalModule,
     FournisseursModule,
     AuthModule,
-    RappelsModule,
     RendezVousModule,
+    FrequencesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

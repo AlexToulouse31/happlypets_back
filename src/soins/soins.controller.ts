@@ -8,7 +8,6 @@ import {
   Delete,
   ParseIntPipe,
   NotFoundException,
-  UseInterceptors,
   UseGuards,
 } from '@nestjs/common';
 import { SoinService } from './soins.service';
@@ -18,6 +17,8 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { EStatus } from 'src/constants/enum';
 import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+
+@UseGuards(JwtAuthGuard)
 @ApiTags('soin')
 @Controller('soin')
 @ApiBearerAuth()
