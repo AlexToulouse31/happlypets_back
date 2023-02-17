@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 
 @Entity('users')
-@Unique(['email', 'username'])
+@Unique(['email', 'pseudo'])
 export class User extends BaseEntity {
   @ApiProperty()
   @PrimaryGeneratedColumn()
@@ -25,13 +25,14 @@ export class User extends BaseEntity {
 
   @ApiProperty()
   @Column({ type: 'varchar' })
-  username: string;
+  pseudo: string;
 
   @ApiProperty()
   @Column({ type: 'varchar' })
   email: string;
 
   @ApiProperty()
+  @Exclude()
   @Column({ type: 'varchar' })
   password: string;
 

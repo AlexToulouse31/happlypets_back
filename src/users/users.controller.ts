@@ -4,23 +4,23 @@ import {
   Body,
   UseInterceptors,
   ClassSerializerInterceptor,
+  UseGuards,
   Patch,
   Request,
   ConflictException,
   Get,
-  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService) {}
 
   @Post('register')
   @UseInterceptors(ClassSerializerInterceptor)
@@ -55,13 +55,13 @@ export class UsersController {
       },
     };
   }
-
+  @ApiBearerAuth()
   @Get('users')
   async findAll() {
     const users = await this.usersService.findAll();
     return users;
   }
-
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Patch()
   @UseInterceptors(ClassSerializerInterceptor)

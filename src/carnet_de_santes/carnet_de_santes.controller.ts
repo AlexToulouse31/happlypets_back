@@ -8,18 +8,24 @@ import {
   Delete,
   ParseIntPipe,
   NotFoundException,
+  UseInterceptors,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { EStatus } from 'src/constants/enum';
+import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
 import { CarnetDeSanteService } from './carnet_de_santes.service';
 import { CreateCarnetDeSanteDto } from './dto/create-carnet_de_santes.dto';
 import { UpdateCarnetDeSanteDto } from './dto/update-carnet_de_santes.dto';
+@UseInterceptors(ExcludeNullInterceptor)
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @ApiTags('carnet')
 @Controller('carnet')
 export class CarnetDeSanteController {
   constructor(private readonly carnetDeSanteService: CarnetDeSanteService) {}
-  /* @ApiBearerAuth()
-  @UseGuards() */
+
   @Post()
   async createCarnet(@Body() createCarnetDeSanteDto: CreateCarnetDeSanteDto) {
     const verifCarnet = await this.carnetDeSanteService.findOneVaccin(
@@ -40,8 +46,7 @@ export class CarnetDeSanteController {
       data: create,
     };
   }
-  /* @ApiBearerAuth()
-  @UseGuards() */
+
   @Get()
   async findAllCarnet() {
     const findAllCarnet = await this.carnetDeSanteService.findAllCarnet();
@@ -55,8 +60,7 @@ export class CarnetDeSanteController {
       data: findAllCarnet,
     };
   }
-  /* @ApiBearerAuth()
-  @UseGuards() */
+
   @Get(':id')
   async findOneCarnet(@Param('id', ParseIntPipe) id: number) {
     const findOneCarnet = await this.carnetDeSanteService.findOneCarnet(id);
@@ -66,8 +70,7 @@ export class CarnetDeSanteController {
       data: findOneCarnet,
     };
   }
-  /* @ApiBearerAuth()
-  @UseGuards() */
+
   @Patch(':id')
   async updateCarnet(
     @Param('id', ParseIntPipe) id: number,
@@ -83,8 +86,7 @@ export class CarnetDeSanteController {
       data: carnetUpdated,
     };
   }
-  /* @ApiBearerAuth()
-  @UseGuards() */
+
   @Delete(':id')
   async removeCarnet(@Param('id', ParseIntPipe) id: number) {
     const data = await this.carnetDeSanteService.findOneCarnet(id);

@@ -8,13 +8,13 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { EMessageStatus, EStatus } from 'src/constants/enum';
 import { AlimentationsService } from './alimentations.service';
 import { CreateAlimentationDto } from './dto/create-alimentation.dto';
 import { UpdateAlimentationDto } from './dto/update-alimentation.dto';
 import { Alimentation } from './entities/alimentation.entity';
-
+@ApiBearerAuth()
 @ApiTags('alimentations')
 @Controller('alimentations')
 export class AlimentationsController {
