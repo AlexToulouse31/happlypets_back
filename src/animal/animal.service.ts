@@ -5,15 +5,16 @@ import { Animal } from './entities/animal.entity';
 
 @Injectable()
 export class AnimalService {
-  async create(createAnimalDto: CreateAnimalDto) {
+  async create(createAnimalDto: CreateAnimalDto, user_id: number) {
     const newAnimal = new Animal();
     newAnimal.nom = createAnimalDto.nom;
-    newAnimal.photo_profil_url = createAnimalDto.photo_profil_url;
+    //newAnimal.photo_profil_url = createAnimalDto.photo_profil_url;
     newAnimal.espece = createAnimalDto.espece;
     newAnimal.race = createAnimalDto.race;
     newAnimal.genre = createAnimalDto.genre;
     newAnimal.date_de_naissance = createAnimalDto.date_de_naissance;
     newAnimal.lof = createAnimalDto.lof;
+    newAnimal.user = user_id;
     await newAnimal.save();
     return newAnimal;
   }

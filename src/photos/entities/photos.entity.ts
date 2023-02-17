@@ -14,6 +14,6 @@ export class Photo extends BaseEntity {
   @Column({ type: 'varchar' })
   url: string;
 
-  @ManyToOne(() => Animal, (animal) => animal.photos)
-  animal: Animal;
+  @ManyToOne(() => Animal, (animal) => animal.id, { eager: true })
+  animal: number;
 }

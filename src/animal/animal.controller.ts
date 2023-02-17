@@ -25,8 +25,10 @@ export class AnimalController {
 
   //@UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() createAnimalDto: CreateAnimalDto) {
-    const newPet = await this.animalService.create(createAnimalDto);
+  async create(@Body() createAnimalDto: CreateAnimalDto, @Request() req) {
+    const user_id = req.user.userId;
+
+    const newPet = await this.animalService.create(createAnimalDto, user_id);
     return { status: 'ok', message: 'Animal créé', data: newPet };
   }
 
