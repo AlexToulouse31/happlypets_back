@@ -1,6 +1,7 @@
 import { Alimentation } from 'src/alimentations/entities/alimentation.entity';
 import { Habitat } from 'src/habitats/entities/habitat.entity';
 import { Photo } from 'src/photos/entities/photos.entity';
+import { RendezVous } from 'src/rendez_vous/entities/rendez_vous.entity';
 import { Soin } from 'src/soins/entities/soins.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
@@ -49,11 +50,14 @@ export class Animal extends BaseEntity {
   soins: Soin[];
 
   @ManyToOne(() => User, (user) => user.animal)
-  user: User;
+  user: number;
 
   @ManyToOne(() => Habitat, (habitat) => habitat.animal)
   habitat: Habitat;
 
   @OneToMany(() => Photo, (photo) => photo.animal)
   photos: Photo[];
+
+  @OneToMany(() => RendezVous, (rendezVous) => rendezVous.animal)
+  rendezVous: RendezVous[];
 }

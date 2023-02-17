@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { EMessageStatus, EStatus } from 'src/constants/enum';
 import { AnimalService } from './animal.service';
 import { CreateAnimalDto } from './dto/create-animal.dto';
 import { UpdateAnimalDto } from './dto/update-animal.dto';
@@ -25,27 +26,68 @@ export class AnimalController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() createAnimalDto: CreateAnimalDto) {
-    const newPet = await this.animalService.create(createAnimalDto);
-    return { status: 'ok', message: 'Animal créé', data: newPet };
+  async create(@Body() createAnimalDto: CreateAnimalDto, @Request() req) {
+    const user_id = req.user.userId;
+    const verifPet = await this.animalService.findOne(createAnimalDto.nom);
+    if (verifPet) {
+      return {
+        status: EStatus.ERROR,
+        message: 'Cet animal existe déja !!',
+      };
+    }
+    const newPet = await this.animalService.create(createAnimalDto, user_id);
+    return {
+      status: EStatus.OK,
+      message: 'Votre Animal a bien été enregistré',
+      data: newPet,
+    };
   }
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
-    return this.animalService.findAll();
+  async findAll() {
+    const allAnimals = await this.animalService.findAll();
+    return {
+      status: EStatus.OK,
+      message: 'Voici tous les animaux enregistrés :',
+      data: allAnimals,
+    };
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('nom')
   async findOne(@Body('nom') nom: string) {
-    return await this.animalService.findOne(nom);
+    const findAnimalByName = await this.animalService.findOne(nom);
+    if (!findAnimalByName) {
+      return {
+        status: EStatus.ERROR,
+        message: `L'animal demandé n'existe pas !!`,
+      };
+    } else {
+      return {
+        status: EStatus.OK,
+        message: `Voici l'animal demandé :`,
+        data: findAnimalByName,
+      };
+    }
   }
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
   async findOneById(@Param('id') id: string) {
-    return await this.animalService.findOneById(+id);
+    const findAnimalById = await this.animalService.findOneById(+id);
+    if (!findAnimalById) {
+      return {
+        status: EStatus.ERROR,
+        message: `L'animal demandé n'existe pas !!`,
+      };
+    } else {
+      return {
+        status: EStatus.OK,
+        message: `Voici l'animal demandé :`,
+        data: findAnimalById,
+      };
+    }
   }
 
   @UseGuards(JwtAuthGuard)
@@ -54,12 +96,29 @@ export class AnimalController {
     @Param('id') id: string,
     @Body() updateAnimalDto: UpdateAnimalDto,
   ) {
-    return await this.animalService.update(+id, updateAnimalDto);
+    const animalUpdate = await this.animalService.update(+id, updateAnimalDto);
+    return {
+      status: EStatus.OK,
+      message: `L'animal a été mise à jour !!`,
+      data: animalUpdate,
+    };
   }
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.animalService.remove(+id);
+  async remove(@Param('id') id: string) {
+    const data = await this.animalService.findOneById(+id);
+    if (!data) {
+      return {
+        status: EStatus.ERROR,
+        message: EMessageStatus.NoData,
+      };
+    }
+    const suppAnimal = await this.animalService.remove(+id);
+    return {
+      status: EStatus.OK,
+      message: `L'animal à été supprimé`,
+      data: suppAnimal,
+    };
   }
 }

@@ -1,10 +1,12 @@
 import { Fournisseur } from 'src/fournisseurs/entities/fournisseurs.entity';
+import { RendezVous } from 'src/rendez_vous/entities/rendez_vous.entity';
 import {
   BaseEntity,
   Column,
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -25,4 +27,7 @@ export class Alimentation extends BaseEntity {
   @ManyToMany(() => Fournisseur)
   @JoinTable()
   fournisseur: Fournisseur[];
+
+  @OneToMany(() => RendezVous, (rendezVous) => rendezVous.alimentation)
+  rendezVous: RendezVous[];
 }

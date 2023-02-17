@@ -22,5 +22,5 @@ export class Habitat extends BaseEntity {
   geocode_lon: number;
 
   @OneToMany(() => Animal, (animal) => animal.habitat)
-  animal: Animal;
+  animal: Animal[];
 }
