@@ -21,7 +21,7 @@ import { SoinsModule } from './soins/soins.module';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { FrequencesModule } from './frequences/frequences.module';
-import { FrequencesModule } from './frequences/frequences.module';
+import { Frequence } from './frequences/entities/frequence.entity';
 
 @Module({
   imports: [
@@ -44,6 +44,7 @@ import { FrequencesModule } from './frequences/frequences.module';
         Alimentation,
         Animal,
         Fournisseur,
+        Frequence,
       ],
       autoLoadEntities: true,
       synchronize: true,

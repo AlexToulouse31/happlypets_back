@@ -1,4 +1,12 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Fournisseur } from 'src/fournisseurs/entities/fournisseurs.entity';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Alimentation extends BaseEntity {
@@ -13,4 +21,8 @@ export class Alimentation extends BaseEntity {
 
   @Column('int')
   stock: number;
+
+  @ManyToMany(() => Fournisseur)
+  @JoinTable()
+  fournisseur: Fournisseur[];
 }
