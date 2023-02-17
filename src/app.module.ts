@@ -20,6 +20,8 @@ import { Soin } from './soins/entities/soins.entity';
 import { SoinsModule } from './soins/soins.module';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
+import { FrequencesModule } from './frequences/frequences.module';
+import { FrequencesModule } from './frequences/frequences.module';
 
 @Module({
   imports: [
@@ -57,6 +59,7 @@ import { UsersModule } from './users/users.module';
     AnimalModule,
     FournisseursModule,
     AuthModule,
+    FrequencesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
