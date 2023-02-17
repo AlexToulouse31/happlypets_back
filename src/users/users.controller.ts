@@ -16,6 +16,7 @@ import * as bcrypt from 'bcrypt';
 //import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
 
 @ApiTags('users')
 @Controller('users')

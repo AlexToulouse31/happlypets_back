@@ -14,7 +14,9 @@ import { UpdateHabitatDto } from './dto/update-habitat.dto';
 import { Habitat } from './entities/habitat.entity';
 import { EMessageStatus, EStatus } from 'src/constants/enum';
 import { NotFoundException } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('habitats')
 @Controller('habitats')
 export class HabitatsController {
   constructor(private readonly habitatsService: HabitatsService) {}

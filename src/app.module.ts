@@ -6,7 +6,6 @@ import { AppService } from './app.service';
 import { Habitat } from './habitats/entities/habitat.entity';
 import { HabitatsModule } from './habitats/habitats.module';
 import { AlimentationsModule } from './alimentations/alimentations.module';
-import { AuthModule } from './auth/auth.module';
 import { User } from './users/entities/user.entity';
 import { CarnetDeSante } from './carnet_de_santes/entities/carnet_de_santes.entity';
 import { Soin } from './soins/entities/soins.entity';
@@ -16,6 +15,8 @@ import { PhotoModule } from './photos/photos.module';
 import { CarnetDeSanteModule } from './carnet_de_santes/carnet_de_santes.module';
 import { UsersModule } from './users/users.module';
 import { Alimentation } from './alimentations/entities/alimentation.entity';
+import { Animal } from './animal/entities/animal.entity';
+import { AnimalModule } from './animal/animal.module';
 
 @Module({
   imports: [
@@ -29,7 +30,15 @@ import { Alimentation } from './alimentations/entities/alimentation.entity';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Habitat, Photo, Soin, CarnetDeSante, User, Alimentation],
+      entities: [
+        Habitat,
+        Photo,
+        Soin,
+        CarnetDeSante,
+        Animal,
+        User,
+        Alimentation,
+      ],
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
