@@ -31,7 +31,4 @@ export class Animal extends BaseEntity {
 
   @Column({ type: 'boolean', default: false })
   lof: boolean;
-
-  @DeleteDateColumn()
-  deletedAt?: Date;
 }
