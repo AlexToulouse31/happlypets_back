@@ -10,7 +10,7 @@ import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ envFilePath: '.env' }),
     UsersModule,
     PassportModule,
     JwtModule.register({
@@ -20,4 +20,4 @@ import { JwtStrategy } from './jwt.strategy';
   providers: [AuthService, UsersService, LocalStrategy, JwtStrategy],
   exports: [AuthService],
 })
-export class AuthModule { }
+export class AuthModule {}

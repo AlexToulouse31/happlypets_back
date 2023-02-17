@@ -1,22 +1,25 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { Habitat } from './habitats/entities/habitat.entity';
-import { HabitatsModule } from './habitats/habitats.module';
 import { AlimentationsModule } from './alimentations/alimentations.module';
-import { User } from './users/entities/user.entity';
-import { CarnetDeSante } from './carnet_de_santes/entities/carnet_de_santes.entity';
-import { Soin } from './soins/entities/soins.entity';
-import { Photo } from './photos/entities/photos.entity';
-import { SoinModule } from './soins/soins.module';
-import { PhotoModule } from './photos/photos.module';
-import { CarnetDeSanteModule } from './carnet_de_santes/carnet_de_santes.module';
-import { UsersModule } from './users/users.module';
 import { Alimentation } from './alimentations/entities/alimentation.entity';
 import { AnimalModule } from './animal/animal.module';
+import { Animal } from './animal/entities/animal.entity';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { CarnetDeSantesModule } from './carnet_de_santes/carnet_de_santes.module';
+import { CarnetDeSante } from './carnet_de_santes/entities/carnet_de_santes.entity';
+import { Fournisseur } from './fournisseurs/entities/fournisseurs.entity';
+import { FournisseursModule } from './fournisseurs/fournisseurs.module';
+import { Habitat } from './habitats/entities/habitat.entity';
+import { HabitatsModule } from './habitats/habitats.module';
+import { Photo } from './photos/entities/photos.entity';
+import { PhotosModule } from './photos/photos.module';
+import { Soin } from './soins/entities/soins.entity';
+import { SoinsModule } from './soins/soins.module';
+import { User } from './users/entities/user.entity';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -30,20 +33,30 @@ import { AuthModule } from './auth/auth.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Habitat, Photo, Soin, CarnetDeSante, User, Alimentation],
+      entities: [
+        Habitat,
+        Photo,
+        Soin,
+        CarnetDeSante,
+        User,
+        Alimentation,
+        Animal,
+        Fournisseur,
+      ],
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
     }),
+
     UsersModule,
     HabitatsModule,
     AlimentationsModule,
-    SoinModule,
-    PhotoModule,
-    CarnetDeSanteModule,
+    SoinsModule,
+    PhotosModule,
+    CarnetDeSantesModule,
     AnimalModule,
-    UsersModule,
-    AuthModule
+    FournisseursModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,4 +1,15 @@
-import { Controller, Post, Body, UseInterceptors, ClassSerializerInterceptor, Patch, Request, ConflictException, Get } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+  Patch,
+  Request,
+  ConflictException,
+  Get,
+  UseGuards,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
@@ -21,7 +32,7 @@ export class UsersController {
     );
     if (isPseudoExist)
       throw new ConflictException(
-        "Pseudo déjà utilisé, veuillez changer de pseudo",
+        'Pseudo déjà utilisé, veuillez changer de pseudo',
       );
 
     const isEmailExist = await this.usersService.findOneByEmail(
@@ -29,7 +40,7 @@ export class UsersController {
     );
     if (isEmailExist)
       throw new ConflictException(
-        "E-mail déjà utilisé, veuillez entrer un e-mail valide",
+        'E-mail déjà utilisé, veuillez entrer un e-mail valide',
       );
 
     const hash = await bcrypt.hash(createUserDto.password, saltOrRounds);
@@ -38,7 +49,7 @@ export class UsersController {
 
     return {
       statusCode: 201,
-      message: "Utilisateur enregistré",
+      message: 'Utilisateur enregistré',
       data: {
         user,
       },
@@ -51,7 +62,7 @@ export class UsersController {
     return users;
   }
 
-  //  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Patch()
   @UseInterceptors(ClassSerializerInterceptor)
   async update(@Body() updateUserDto: UpdateUserDto, @Request() req) {
@@ -64,7 +75,7 @@ export class UsersController {
 
     return {
       statusCode: 201,
-      message: "Modifications enregistrées",
+      message: 'Modifications enregistrées',
       data: {
         userUpdate,
       },
