@@ -5,31 +5,30 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
-    constructor(
-        private readonly usersService: UsersService,
-        private readonly jwtService: JwtService,
-    ) { }
+  constructor(
+    private usersService: UsersService,
+    private jwtService: JwtService,
+  ) { }
 
-    async validateUser(username: string, password: string): Promise<any> {
-        const user = await this.usersService.findOneByPseudo(username);
-        const isMatch = await bcrypt.compare(password, user.password);
+  async validateUser(username: string, password: string): Promise<any> {
+    console.log(username);
 
-        if (isMatch) {
-            const { password, ...result } = user;
-            return result;
-        }
-        return null;
+    const user = await this.usersService.findOneByPseudo(username);
+    const isMatch = await bcrypt.compare(password, user.password);
+    console.log(user);
+
+    if (isMatch) {
+      const { password, ...result } = user;
+      return result;
     }
+    return null;
+  }
 
-    async login(user: any) {
-        const payload = { username: user.pseudo, sub: user.id };
+  async login(user: any) {
+    const payload = { username: user.username, sub: user.id };
 
-        return {
-            statusCode: 200,
-            message: "Connection réussie",
-            data: {
-                access_token: this.jwtService.sign(payload),
-            },
-        };
-    }
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
+  }
 }

@@ -4,20 +4,20 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from 'src/users/users.module';
 import { UsersService } from 'src/users/users.service';
-import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { LocalStrategy } from './local.strategy';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ envFilePath: '.env' }),
     UsersModule,
     PassportModule,
     JwtModule.register({
-      secret: process.env.jwt,
+      secret: process.env.JWT,
     }),
   ],
-  providers: [AuthService, UsersService],
+  providers: [AuthService, UsersService, LocalStrategy, JwtStrategy],
   exports: [AuthService],
-  controllers: [AuthController],
 })
-export class AuthModule { }
+export class AuthModule {}

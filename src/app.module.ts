@@ -1,22 +1,25 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AlimentationsModule } from './alimentations/alimentations.module';
+import { Alimentation } from './alimentations/entities/alimentation.entity';
+import { AnimalModule } from './animal/animal.module';
+import { Animal } from './animal/entities/animal.entity';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
+import { CarnetDeSantesModule } from './carnet_de_santes/carnet_de_santes.module';
+import { CarnetDeSante } from './carnet_de_santes/entities/carnet_de_santes.entity';
+import { Fournisseur } from './fournisseurs/entities/fournisseurs.entity';
+import { FournisseursModule } from './fournisseurs/fournisseurs.module';
 import { Habitat } from './habitats/entities/habitat.entity';
 import { HabitatsModule } from './habitats/habitats.module';
-import { AlimentationsModule } from './alimentations/alimentations.module';
-import { User } from './users/entities/user.entity';
-import { CarnetDeSante } from './carnet_de_santes/entities/carnet_de_santes.entity';
-import { Soin } from './soins/entities/soins.entity';
 import { Photo } from './photos/entities/photos.entity';
-import { SoinModule } from './soins/soins.module';
-import { PhotoModule } from './photos/photos.module';
-import { CarnetDeSanteModule } from './carnet_de_santes/carnet_de_santes.module';
+import { PhotosModule } from './photos/photos.module';
+import { Soin } from './soins/entities/soins.entity';
+import { SoinsModule } from './soins/soins.module';
+import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
-import { Alimentation } from './alimentations/entities/alimentation.entity';
-import { Animal } from './animal/entities/animal.entity';
-import { AnimalModule } from './animal/animal.module';
 
 @Module({
   imports: [
@@ -35,21 +38,25 @@ import { AnimalModule } from './animal/animal.module';
         Photo,
         Soin,
         CarnetDeSante,
-        Animal,
         User,
         Alimentation,
+        Animal,
+        Fournisseur,
       ],
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
     }),
+
+    UsersModule,
     HabitatsModule,
     AlimentationsModule,
-    SoinModule,
-    PhotoModule,
-    CarnetDeSanteModule,
+    SoinsModule,
+    PhotosModule,
+    CarnetDeSantesModule,
     AnimalModule,
-    UsersModule,
+    FournisseursModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

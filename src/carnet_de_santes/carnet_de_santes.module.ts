@@ -6,4 +6,4 @@ import { CarnetDeSanteController } from './carnet_de_santes.controller';
   controllers: [CarnetDeSanteController],
   providers: [CarnetDeSanteService],
 })
-export class CarnetDeSanteModule {}
+export class CarnetDeSantesModule {}

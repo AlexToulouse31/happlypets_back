@@ -6,4 +6,4 @@ import { PhotoController } from './photos.controller';
   controllers: [PhotoController],
   providers: [PhotoService],
 })
-export class PhotoModule {}
+export class PhotosModule {}
