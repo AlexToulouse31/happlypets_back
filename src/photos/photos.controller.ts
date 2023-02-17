@@ -19,6 +19,7 @@ import { EStatus } from 'src/constants/enum';
 import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
 @ApiTags('photo')
 @Controller('photo')
+@ApiBearerAuth()
 export class PhotoController {
   constructor(private readonly photoService: PhotoService) {}
   /* @ApiBearerAuth()

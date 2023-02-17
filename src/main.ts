@@ -9,6 +9,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('HapplyPets')
     .setDescription(
       'Laissez votre animal avoir un HAPPLY day avec HAPPLY PETS !',

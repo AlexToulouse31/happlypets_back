@@ -13,12 +13,8 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
-<<<<<<< HEAD
-//import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-=======
->>>>>>> 1e6f2505b4fc0d651ce598e792485002e0ba25ae
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @ApiTags('users')
@@ -59,13 +55,13 @@ export class UsersController {
       },
     };
   }
-
+  @ApiBearerAuth()
   @Get('users')
   async findAll() {
     const users = await this.usersService.findAll();
     return users;
   }
-
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Patch()
   @UseInterceptors(ClassSerializerInterceptor)
