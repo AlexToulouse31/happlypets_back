@@ -9,18 +9,21 @@ import {
   UseGuards,
   ParseIntPipe,
   NotFoundException,
+  UseInterceptors,
 } from '@nestjs/common';
 import { PhotoService } from './photos.service';
 import { CreatePhotoDto } from './dto/create-photos.dto';
 import { UpdatePhotoDto } from './dto/update-photos.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { EStatus } from 'src/constants/enum';
+import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
 @ApiTags('photo')
 @Controller('photo')
 export class PhotoController {
   constructor(private readonly photoService: PhotoService) {}
   /* @ApiBearerAuth()
   @UseGuards() */
+  @UseInterceptors(ExcludeNullInterceptor)
   @Post()
   async createPhoto(@Body() createPhotoDto: CreatePhotoDto) {
     const verifPhoto = await this.photoService.findOneUrl(createPhotoDto.url);

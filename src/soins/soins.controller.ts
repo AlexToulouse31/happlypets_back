@@ -8,18 +8,21 @@ import {
   Delete,
   ParseIntPipe,
   NotFoundException,
+  UseInterceptors,
 } from '@nestjs/common';
 import { SoinService } from './soins.service';
 import { CreateSoinDto } from './dto/create-soins.dto';
 import { UpdateSoinDto } from './dto/update-soins.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { EStatus } from 'src/constants/enum';
+import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
 @ApiTags('soin')
 @Controller('soin')
 export class SoinController {
   constructor(private readonly soinService: SoinService) {}
   /* @ApiBearerAuth()
   @UseGuards() */
+  /*   @UseInterceptors(ExcludeNullInterceptor) */
   @Post()
   async createSoin(@Body() createSoinDto: CreateSoinDto) {
     const verifSoin = await this.soinService.findOneActivite(

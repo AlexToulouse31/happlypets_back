@@ -4,6 +4,7 @@ import {
   Body,
   UseInterceptors,
   ClassSerializerInterceptor,
+  UseGuards,
   Patch,
   Request,
   ConflictException,
@@ -27,7 +28,7 @@ export class UsersController {
     const saltOrRounds = 10;
 
     const isPseudoExist = await this.usersService.findOneByPseudo(
-      createUserDto.username,
+      createUserDto.pseudo,
     );
     if (isPseudoExist)
       throw new ConflictException(

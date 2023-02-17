@@ -11,11 +11,8 @@ export class AuthService {
   ) {}
 
   async validateUser(username: string, password: string): Promise<any> {
-    console.log(username);
-
     const user = await this.usersService.findOneByPseudo(username);
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log(user);
 
     if (isMatch) {
       const { password, ...result } = user;
@@ -25,7 +22,7 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload = { username: user.username, sub: user.id };
+    const payload = { username: user.pseudo, sub: user.id };
 
     return {
       statusCode: 200,

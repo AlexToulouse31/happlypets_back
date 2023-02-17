@@ -8,12 +8,14 @@ import {
   Delete,
   ParseIntPipe,
   NotFoundException,
+  UseInterceptors,
 } from '@nestjs/common';
 import { FournisseursService } from './fournisseurs.service';
 import { CreateFournisseurDto } from './dto/create-fournisseurs.dto';
 import { UpdateFournisseurDto } from './dto/update-fournisseurs.dto';
 import { EStatus } from 'src/constants/enum';
-
+import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
+@UseInterceptors(ExcludeNullInterceptor)
 @Controller('fournisseurs')
 export class FournisseursController {
   constructor(private readonly fournisseursService: FournisseursService) {}

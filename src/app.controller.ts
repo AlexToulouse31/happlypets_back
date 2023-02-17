@@ -1,7 +1,14 @@
-import { Controller, Get, Post, Request } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Request,
+  UseInterceptors,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
-
+import { ExcludeNullInterceptor } from './Interceptor/interceptor';
+@UseInterceptors(ExcludeNullInterceptor)
 @Controller()
 export class AppController {
   constructor(

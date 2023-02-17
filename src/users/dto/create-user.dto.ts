@@ -12,7 +12,7 @@ export class CreateUserDto {
 
   @ApiProperty()
   @IsString()
-  username: string;
+  pseudo: string;
 
   @ApiProperty()
   @IsEmail()
@@ -24,7 +24,7 @@ export class CreateUserDto {
 
   @ApiProperty()
   @IsString()
-  adresse: string;
+  addresse: string;
 
   @ApiProperty()
   @IsString()
@@ -37,4 +37,5 @@ export class CreateUserDto {
   @ApiProperty()
   @IsBoolean()
   admin: boolean;
+  adresse: any;
 }

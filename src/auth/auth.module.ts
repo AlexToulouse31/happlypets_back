@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ envFilePath: '.env' }),
+    ConfigModule.forRoot(),
     UsersModule,
     PassportModule,
     JwtModule.register({
