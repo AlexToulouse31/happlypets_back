@@ -1,9 +1,11 @@
+import { Animal } from 'src/animal/entities/animal.entity';
 import { RendezVous } from 'src/rendez_vous/entities/rendez_vous.entity';
 import {
   BaseEntity,
   Column,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -22,4 +24,6 @@ export class CarnetDeSante extends BaseEntity {
 
   @OneToMany(() => RendezVous, (rendezVous) => rendezVous.carnetDeSante)
   rendezVous: RendezVous[];
+  @OneToOne(() => Animal, (animal) => animal.user)
+  animal: Animal;
 }

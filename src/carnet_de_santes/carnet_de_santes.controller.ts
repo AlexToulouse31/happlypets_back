@@ -8,13 +8,11 @@ import {
   Delete,
   ParseIntPipe,
   NotFoundException,
-  UseInterceptors,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { EStatus } from 'src/constants/enum';
-import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
 import { CarnetDeSanteService } from './carnet_de_santes.service';
 import { CreateCarnetDeSanteDto } from './dto/create-carnet_de_santes.dto';
 import { UpdateCarnetDeSanteDto } from './dto/update-carnet_de_santes.dto';

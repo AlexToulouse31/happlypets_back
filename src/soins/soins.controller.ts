@@ -15,7 +15,7 @@ import { CreateSoinDto } from './dto/create-soins.dto';
 import { UpdateSoinDto } from './dto/update-soins.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { EStatus } from 'src/constants/enum';
-import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
+
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @UseGuards(JwtAuthGuard)
@@ -25,7 +25,6 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 export class SoinController {
   constructor(private readonly soinService: SoinService) {}
 
-  @UseGuards(JwtAuthGuard)
   /*   @UseInterceptors(ExcludeNullInterceptor) */
   @Post()
   async createSoin(@Body() createSoinDto: CreateSoinDto) {
@@ -42,7 +41,6 @@ export class SoinController {
     return create;
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get()
   async findAllSoin() {
     const soinAllFind = await this.soinService.findAllSoin();
@@ -54,7 +52,6 @@ export class SoinController {
     };
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get(':id')
   async soinfindOne(@Param('id', ParseIntPipe) id: number) {
     const findOneSoin = await this.soinService.findOneSoin(id);
@@ -68,7 +65,6 @@ export class SoinController {
     };
   }
 
-  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async updateSoin(
     @Param('id', ParseIntPipe) id: number,
@@ -84,7 +80,7 @@ export class SoinController {
       data: soinUpdated,
     };
   }
-  @UseGuards(JwtAuthGuard)
+
   @Delete(':id')
   async removeSoin(@Param('id', ParseIntPipe) id: number) {
     const data = await this.soinService.findOneSoin(id);

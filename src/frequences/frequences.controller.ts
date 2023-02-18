@@ -8,12 +8,20 @@ import {
   Delete,
   ParseIntPipe,
   NotFoundException,
+  UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { FrequencesService } from './frequences.service';
 import { CreateFrequenceDto } from './dto/create-frequence.dto';
 import { UpdateFrequenceDto } from './dto/update-frequence.dto';
 import { EStatus } from 'src/constants/enum';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
+@UseInterceptors(ExcludeNullInterceptor)
+@ApiBearerAuth()
+@ApiTags('frequences')
+@UseGuards(JwtAuthGuard)
 @Controller('frequences')
 export class FrequencesController {
   constructor(private readonly frequencesService: FrequencesService) {}

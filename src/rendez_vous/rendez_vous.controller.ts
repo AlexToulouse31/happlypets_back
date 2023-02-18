@@ -1,8 +1,24 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { RendezVousService } from './rendez_vous.service';
 import { CreateRendezVousDto } from './dto/create-rendez_vous.dto';
 import { UpdateRendezVousDto } from './dto/update-rendez_vous.dto';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
+@UseInterceptors(ExcludeNullInterceptor)
+@ApiBearerAuth()
+@ApiTags('rendez-vous')
+@UseGuards(JwtAuthGuard)
 @Controller('rendez-vous')
 export class RendezVousController {
   constructor(private readonly rendezVousService: RendezVousService) {}
@@ -23,7 +39,10 @@ export class RendezVousController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRendezVousDto: UpdateRendezVousDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateRendezVousDto: UpdateRendezVousDto,
+  ) {
     return this.rendezVousService.update(+id, updateRendezVousDto);
   }
 
