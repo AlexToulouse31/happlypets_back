@@ -60,7 +60,11 @@ export class Animal extends BaseEntity {
   soins: number[];
 
   @ApiProperty()
-  @ManyToOne(() => User, (user) => user.id, { eager: true })
+  @ManyToOne(() => User, (user) => user.id, {
+    eager: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   user: number;
 
   @ApiProperty()
