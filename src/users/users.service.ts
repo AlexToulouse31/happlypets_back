@@ -15,6 +15,7 @@ export class UsersService {
     newUser.password = hash;
     newUser.adresse = createUserDto.adresse;
     newUser.ville = createUserDto.ville;
+    newUser.codepostale = createUserDto.codepostale;
     newUser.departement = createUserDto.departement;
 
     await newUser.save();
@@ -56,6 +57,7 @@ export class UsersService {
     newUser.pseudo = updateUserDto.pseudo;
     newUser.adresse = updateUserDto.adresse;
     newUser.ville = updateUserDto.ville;
+    newUser.codepostale = updateUserDto.codepostale;
     newUser.departement = updateUserDto.departement;
 
     await User.save(newUser);

@@ -33,6 +33,10 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
 
   @ApiProperty()
   @IsString()
+  codepostale: number;
+
+  @ApiProperty()
+  @IsString()
   departement: string;
 
   @ApiProperty()

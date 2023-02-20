@@ -47,6 +47,10 @@ export class User extends BaseEntity {
   ville: string;
 
   @ApiProperty()
+  @Column({ type: 'number' })
+  codepostale: number;
+
+  @ApiProperty()
   @Column({ type: 'varchar' })
   departement: string;
 

@@ -40,5 +40,10 @@ export class CreateUserDto {
     @ApiProperty()
     @IsString()
     @IsNotEmpty()
+    codepostale: number;
+
+    @ApiProperty()
+    @IsString()
+    @IsNotEmpty()
     departement: string;
 }
