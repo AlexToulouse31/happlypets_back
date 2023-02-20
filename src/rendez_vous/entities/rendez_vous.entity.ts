@@ -8,6 +8,7 @@ import {
   Column,
   Entity,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -28,18 +29,34 @@ export class RendezVous extends BaseEntity {
   @Column({ type: 'boolean', default: false })
   done: boolean;
 
-  @ManyToOne(() => Alimentation, (alimentation) => alimentation.rendezVous)
-  alimentation: Alimentation;
+  /* @ManyToOne(() => Alimentation, (alimentation) => alimentation.rendezVous, {
+    eager: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  alimentation: Alimentation; */
 
-  @ManyToOne(() => CarnetDeSante, (carnetDeSante) => carnetDeSante.rendezVous)
+  @ManyToOne(() => CarnetDeSante, (carnetDeSante) => carnetDeSante.rendezVous, {
+    eager: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   carnetDeSante: CarnetDeSante;
 
-  @ManyToOne(() => Frequence, (frequence) => frequence.rendezVous)
+  @ManyToOne(() => Frequence, (frequence) => frequence.rendezVous, {
+    eager: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   frequence: Frequence;
 
-  @ManyToOne(() => Soin, (soin) => soin.rendezVous)
+  @OneToOne(() => Soin)
   soin: Soin;
 
-  @ManyToOne(() => Animal, (animal) => animal.rendezVous)
+  @ManyToOne(() => Animal, (animal) => animal.rendezVous, {
+    eager: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   animal: Animal;
 }

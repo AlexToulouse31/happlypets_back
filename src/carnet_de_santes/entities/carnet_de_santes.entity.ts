@@ -24,6 +24,7 @@ export class CarnetDeSante extends BaseEntity {
 
   @OneToMany(() => RendezVous, (rendezVous) => rendezVous.carnetDeSante)
   rendezVous: RendezVous[];
+
   @OneToOne(() => Animal, (animal) => animal.user)
   animal: Animal;
 }

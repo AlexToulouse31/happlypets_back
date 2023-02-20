@@ -1,4 +1,5 @@
 import { Alimentation } from 'src/alimentations/entities/alimentation.entity';
+import { CarnetDeSante } from 'src/carnet_de_santes/entities/carnet_de_santes.entity';
 import { Habitat } from 'src/habitats/entities/habitat.entity';
 import { Photo } from 'src/photos/entities/photos.entity';
 import { RendezVous } from 'src/rendez_vous/entities/rendez_vous.entity';
@@ -13,6 +14,8 @@ import {
   JoinTable,
   ManyToOne,
   OneToMany,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity()
@@ -56,7 +59,11 @@ export class Animal extends BaseEntity {
   })
   user: number;
 
-  @ManyToOne(() => Habitat, (habitat) => habitat.id)
+  @ManyToOne(() => Habitat, (habitat) => habitat.id, {
+    eager: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   habitat: number;
 
   @OneToMany(() => Photo, (photo) => photo.animal)
@@ -64,4 +71,8 @@ export class Animal extends BaseEntity {
 
   @OneToMany(() => RendezVous, (rendezVous) => rendezVous.animal)
   rendezVous: RendezVous[];
+
+  @OneToOne(() => CarnetDeSante)
+  @JoinColumn()
+  carnetdesante: CarnetDeSante;
 }

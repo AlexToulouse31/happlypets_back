@@ -18,6 +18,6 @@ export class Soin extends BaseEntity {
   @ManyToOne(() => Animal, (animal) => animal.soins)
   animal: Animal;
 
-  @OneToMany(() => RendezVous, (rendezVous) => rendezVous.soin)
-  rendezVous: RendezVous[];
+  /* @OneToMany(() => RendezVous, (rendezVous) => rendezVous.soin)
+  rendezVous: RendezVous[]; */
 }
