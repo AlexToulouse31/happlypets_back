@@ -14,5 +14,5 @@ export class Frequence extends BaseEntity {
   @Column({ type: 'varchar' })
   periodicite: string;
   @OneToMany(() => RendezVous, (rendezVous) => rendezVous.frequence)
-  rendezVous: RendezVous[];
+  rendezVous: RendezVous;
 }

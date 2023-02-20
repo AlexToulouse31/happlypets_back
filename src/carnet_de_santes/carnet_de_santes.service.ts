@@ -16,7 +16,9 @@ export class CarnetDeSanteService {
   }
 
   async findAllCarnet(): Promise<CarnetDeSante[] | undefined> {
-    const carnetAll = await CarnetDeSante.find();
+    const carnetAll = await CarnetDeSante.find({
+      relations: { animal: true },
+    });
 
     if (carnetAll[0]) {
       return carnetAll;
