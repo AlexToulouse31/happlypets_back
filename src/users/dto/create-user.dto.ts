@@ -46,7 +46,7 @@ export class CreateUserDto {
   @ApiProperty()
   @IsPostalCode('any')
   @IsNotEmpty()
-  codepostal: number;
+  codepostal: string;
 
   @ApiProperty()
   @IsString()

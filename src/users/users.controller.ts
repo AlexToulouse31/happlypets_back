@@ -55,12 +55,13 @@ export class UsersController {
       },
     };
   }
-  @ApiBearerAuth()
+  //@ApiBearerAuth()
   @Get('users')
   async findAll() {
     const users = await this.usersService.findAll();
     return users;
   }
+
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Patch()

@@ -33,7 +33,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
 
   @ApiProperty()
   @IsPostalCode('any')
-  codepostal: number;
+  codepostal: string;
 
   @ApiProperty()
   @IsString()
