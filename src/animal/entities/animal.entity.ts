@@ -49,7 +49,11 @@ export class Animal extends BaseEntity {
   @OneToMany(() => Soin, (soin) => soin.id)
   soins: number[];
 
-  @ManyToOne(() => User, (user) => user.id, { eager: true })
+  @ManyToOne(() => User, (user) => user.id, {
+    eager: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   user: number;
 
   @ManyToOne(() => Habitat, (habitat) => habitat.id)
