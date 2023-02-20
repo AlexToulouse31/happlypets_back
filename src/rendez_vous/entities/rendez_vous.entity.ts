@@ -17,7 +17,7 @@ export class RendezVous extends BaseEntity {
   id: number;
 
   @Column({ type: 'varchar' })
-  title: string;
+  titles: string;
 
   @Column({ type: 'timestamp' })
   start: Date;
