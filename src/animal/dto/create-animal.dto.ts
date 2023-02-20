@@ -1,37 +1,44 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsString,
   IsBoolean,
-  IsDate,
   IsOptional,
   IsDateString,
 } from 'class-validator';
 
 export class CreateAnimalDto {
+  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   nom: string;
 
-  @IsOptional()
+  /* @IsOptional()
   @IsString()
-  photo_profil_url: string;
+  photo_profil_url: string; */
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   espece: string;
 
+  @ApiProperty()
   @IsOptional()
   @IsString()
   race: string;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
   genre: boolean;
 
+  @ApiProperty()
   @IsOptional()
   @IsDateString()
   date_de_naissance: Date;
 
+  @ApiProperty()
   @IsBoolean()
+  @IsOptional()
   lof: boolean;
 }

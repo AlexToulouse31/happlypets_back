@@ -29,7 +29,7 @@ export class AnimalController {
   async create(@Body() createAnimalDto: CreateAnimalDto, @Request() req) {
     const user_id = req.user.userId;
     const verifPet = await this.animalService.findOne(createAnimalDto.nom);
-    if (verifPet) {
+    if (verifPet.length !== 0) {
       return {
         status: EStatus.ERROR,
         message: 'Cet animal existe déja !!',

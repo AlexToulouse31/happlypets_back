@@ -1,19 +1,31 @@
-import { IsBoolean, IsDateString, IsNotEmpty, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsBoolean,
+  IsDateString,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreateRendezVousDto {
+  @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  title: string;
+  titles: string;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   start: Date;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   end: Date;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
+  @IsOptional()
   done: boolean;
 }
