@@ -23,7 +23,7 @@ export class UsersService {
   }
 
   async findAll() {
-    const users = await User.find({});
+    const users = await User.find({ relations: { animal: true } });
     return users;
   }
 
