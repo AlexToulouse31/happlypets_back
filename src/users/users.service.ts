@@ -23,7 +23,13 @@ export class UsersService {
   }
 
   async findAll() {
-    const users = await User.find({ relations: { animal: true } });
+    const users = await User.find({
+      relations: {
+        animal: {
+          rendezVous: true,
+        },
+      },
+    });
     return users;
   }
 
