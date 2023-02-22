@@ -55,7 +55,9 @@ export class UsersController {
       },
     };
   }
-  //@ApiBearerAuth()
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Get('users')
   async findAll() {
     const users = await this.usersService.findAll();
