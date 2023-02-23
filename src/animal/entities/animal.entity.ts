@@ -64,7 +64,6 @@ export class Animal extends BaseEntity {
 
   @ApiProperty()
   @ManyToOne(() => User, (user) => user.id, {
-    eager: true,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
