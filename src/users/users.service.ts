@@ -38,6 +38,14 @@ export class UsersService {
 
     return user;
   }
+  async findOneUser(pseudo: string) {
+    const user = await User.find({
+      relations: { animal: true },
+      where: { pseudo: pseudo },
+    });
+
+    return user;
+  }
 
   async findOneByEmail(email: string) {
     const userMail = await User.findOne({ where: { email: email } });

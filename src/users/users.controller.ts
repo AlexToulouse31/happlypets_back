@@ -64,6 +64,13 @@ export class UsersController {
     return users;
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('profil')
+  async getProfile(@Request() req) {
+    const profil = await this.usersService.findOneUser(req.user.username);
+    return profil;
+  }
+
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Patch()
