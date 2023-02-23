@@ -16,7 +16,6 @@ import * as bcrypt from 'bcrypt';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { Public } from 'src/Interceptor/setMetadata';
 
 @ApiTags('users')
 @Controller('users')
@@ -63,6 +62,13 @@ export class UsersController {
   async findAll() {
     const users = await this.usersService.findAll();
     return users;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('profil')
+  async getProfile(@Request() req) {
+    const profil = await this.usersService.findOneUser(req.user.username);
+    return profil;
   }
 
   @ApiBearerAuth()
