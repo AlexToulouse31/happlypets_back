@@ -43,6 +43,7 @@ export class UsersService {
       relations: { animal: true },
       where: { pseudo: pseudo },
     });
+    console.log(user);
 
     return user;
   }
