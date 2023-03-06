@@ -55,11 +55,20 @@ export class UsersController {
       },
     };
   }
-  //@ApiBearerAuth()
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Get('users')
   async findAll() {
     const users = await this.usersService.findAll();
     return users;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('profil')
+  async getProfile(@Request() req) {
+    const profil = await this.usersService.findOneUser(req.user.username);
+    return profil;
   }
 
   @ApiBearerAuth()
