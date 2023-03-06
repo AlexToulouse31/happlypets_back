@@ -69,6 +69,7 @@ export class Animal extends BaseEntity {
   })
   user: number;
 
+  @ApiProperty()
   @ManyToOne(() => Habitat, (habitat) => habitat.id, {
     eager: true,
     onDelete: 'CASCADE',
@@ -77,14 +78,26 @@ export class Animal extends BaseEntity {
   habitat: number;
 
   @ApiProperty()
-  @OneToMany(() => Photo, (photo) => photo.animal)
+  @OneToMany(() => Photo, (photo) => photo.animal, {
+    eager: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   photos: Photo[];
 
   @ApiProperty()
-  @OneToMany(() => RendezVous, (rendezVous) => rendezVous.animal)
+  @OneToMany(() => RendezVous, (rendezVous) => rendezVous.animal, {
+    eager: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   rendezVous: RendezVous[];
 
-  @OneToOne(() => CarnetDeSante)
-  @JoinColumn()
-  carnetdesante: CarnetDeSante;
+  @ApiProperty()
+  @OneToMany(() => CarnetDeSante, (carnetdeSante) => carnetdeSante.animal, {
+    eager: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  carnetdesante: CarnetDeSante[];
 }

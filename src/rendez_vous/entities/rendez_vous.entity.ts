@@ -53,10 +53,6 @@ export class RendezVous extends BaseEntity {
   @OneToOne(() => Soin)
   soin: Soin;
 
-  @ManyToOne(() => Animal, (animal) => animal.rendezVous, {
-    eager: true,
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
-  animal: Animal;
+  @ManyToOne(() => Animal, (animal) => animal.id)
+  animal: number;
 }
