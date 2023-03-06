@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { Animal } from 'src/animal/entities/animal.entity';
 
 export class CreateCarnetDeSanteDto {
   @ApiProperty()
@@ -18,4 +19,8 @@ export class CreateCarnetDeSanteDto {
   @IsNotEmpty()
   @IsBoolean()
   steriliser: boolean;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  animal: Animal;
 }

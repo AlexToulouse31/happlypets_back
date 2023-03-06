@@ -15,8 +15,8 @@ export class Soin extends BaseEntity {
   @Column({ type: 'varchar' })
   activite: string;
 
-  @ManyToOne(() => Animal, (animal) => animal.soins)
-  animal: Animal;
+  @ManyToOne(() => Animal, (animal) => animal.id)
+  animal: number;
 
   /* @OneToMany(() => RendezVous, (rendezVous) => rendezVous.soin)
   rendezVous: RendezVous[]; */

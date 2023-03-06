@@ -12,6 +12,7 @@ export class AppController {
     private readonly appService: AppService,
     private authService: AuthService,
   ) {}
+
   @ApiBody({ type: LoginDto })
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
