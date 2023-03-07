@@ -66,6 +66,9 @@ export class UsersController {
   @Get('users')
   async findAll() {
     const users = await this.usersService.findAll();
+    if (!users) {
+      throw new NotFoundException('Pas de compte enregistreé pour l instant');
+    }
     return users;
   }
 
@@ -80,7 +83,7 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Patch()
   async update(@Body() updateUserDto: UpdateUserDto, @Request() req) {
-    const userLogged = req.user.userId;
+    const userLogged = req.user.id;
 
     const userUpdate = await this.usersService.update(
       userLogged,
@@ -100,8 +103,7 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Delete()
   async removeUser(@Request() req) {
-    const userDeleted = req.user.userId;
-    console.log(req.user.userId);
+    const userDeleted: number = req.user.userId;
 
     const data = await this.usersService.findOneById(userDeleted);
     if (!data) {
