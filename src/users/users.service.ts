@@ -36,8 +36,13 @@ export class UsersService {
   async findOneByPseudo(pseudo: string) {
     const user = await User.findOne({ where: { pseudo: pseudo } });
 
-    return user;
+    if (user) {
+      return user;
+    }
+
+    return undefined;
   }
+
   async findOneUser(pseudo: string) {
     const user = await User.find({
       relations: { animal: true },
@@ -77,5 +82,11 @@ export class UsersService {
     await User.save(newUser);
 
     return await User.findOneBy({ id: id });
+  }
+
+  async delete(id: number) {
+    const deleteUser = await User.findOneBy({ id: id });
+    User.remove(deleteUser)
+    return deleteUser;
   }
 }
