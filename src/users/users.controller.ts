@@ -74,7 +74,7 @@ export class UsersController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Patch()
-  @UseInterceptors(ClassSerializerInterceptor)
+
   async update(@Body() updateUserDto: UpdateUserDto, @Request() req) {
     const userLogged = req.user.id;
 
