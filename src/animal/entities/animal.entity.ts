@@ -46,7 +46,7 @@ export class Animal extends BaseEntity {
   genre: boolean;
 
   @ApiProperty()
-  @Column({ type: 'timestamp', default: null })
+  @Column({ type: 'date', default: null })
   date_de_naissance: Date;
 
   @ApiProperty()
