@@ -9,6 +9,10 @@ import {
   Request,
   ConflictException,
   Get,
+  ParseIntPipe,
+  Delete,
+  Param,
+  NotFoundException,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -16,12 +20,13 @@ import * as bcrypt from 'bcrypt';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { EStatus } from 'src/constants/enum';
 
 @ApiTags('users')
 @Controller('users')
 @UseInterceptors(ClassSerializerInterceptor)
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Post('register')
   async create(@Body() createUserDto: CreateUserDto) {
@@ -74,7 +79,6 @@ export class UsersController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Patch()
-  @UseInterceptors(ClassSerializerInterceptor)
   async update(@Body() updateUserDto: UpdateUserDto, @Request() req) {
     const userLogged = req.user.id;
 
@@ -90,5 +94,23 @@ export class UsersController {
         userUpdate,
       },
     };
+  }
+
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  async removeUser(@Param('id', ParseIntPipe) id: number) {
+    const data = await this.usersService.findOneById(id);
+    if (!data) {
+      throw new NotFoundException('Votre compte à déjà été supprimé');
+    }
+
+    const userRemoved = await this.usersService.findOneById(id);
+    return {
+      status: EStatus.OK,
+      message: `Le compte numéro ${data.id} a été supprimé`,
+      data: userRemoved,
+    }
   }
 }
