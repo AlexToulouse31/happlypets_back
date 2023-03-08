@@ -70,23 +70,18 @@ export class UsersService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
+    await User.update(id, updateUserDto);
+
     const newUser = await User.findOneBy({
       id: id,
     });
-    newUser.pseudo = updateUserDto.pseudo;
-    newUser.adresse = updateUserDto.adresse;
-    newUser.ville = updateUserDto.ville;
-    newUser.codepostal = updateUserDto.codepostal;
-    newUser.departement = updateUserDto.departement;
 
-    await User.save(newUser);
-
-    return await User.findOneBy({ id: id });
+    return newUser;
   }
 
   async delete(id: number) {
     const deleteUser = await User.findOneBy({ id: id });
-    User.remove(deleteUser)
+    User.remove(deleteUser);
     return deleteUser;
   }
 }

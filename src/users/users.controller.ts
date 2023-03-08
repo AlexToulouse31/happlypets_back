@@ -26,7 +26,7 @@ import { EStatus } from 'src/constants/enum';
 @Controller('users')
 @UseInterceptors(ClassSerializerInterceptor)
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService) {}
 
   @Post('register')
   async create(@Body() createUserDto: CreateUserDto) {
@@ -66,6 +66,9 @@ export class UsersController {
   @Get('users')
   async findAll() {
     const users = await this.usersService.findAll();
+    if (!users) {
+      throw new NotFoundException('Pas de compte enregistreé pour l instant');
+    }
     return users;
   }
 
@@ -96,21 +99,22 @@ export class UsersController {
     };
   }
 
-
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
-  @Delete(':id')
-  async removeUser(@Param('id', ParseIntPipe) id: number) {
-    const data = await this.usersService.findOneById(id);
+  @Delete()
+  async removeUser(@Request() req) {
+    const userDeleted: number = req.user.userId;
+
+    const data = await this.usersService.findOneById(userDeleted);
     if (!data) {
       throw new NotFoundException('Votre compte à déjà été supprimé');
     }
 
-    const userRemoved = await this.usersService.findOneById(id);
+    const userRemoved = await this.usersService.delete(data.id);
     return {
       status: EStatus.OK,
       message: `Le compte numéro ${data.id} a été supprimé`,
       data: userRemoved,
-    }
+    };
   }
 }
