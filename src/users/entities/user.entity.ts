@@ -54,6 +54,10 @@ export class User extends BaseEntity {
   @Column({ type: 'varchar' })
   departement: string;
 
+  @ApiProperty()
+  @Column({ type: 'bytea', nullable: true })
+  avatar: string;
+
   @OneToMany(() => Animal, (animal) => animal.user, { eager: true })
   animal: Animal;
 }
