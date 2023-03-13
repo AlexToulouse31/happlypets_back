@@ -75,7 +75,7 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Get('profil')
   async getProfile(@Request() req) {
-    const profil = await this.usersService.findOneUser(req.user.username);
+    const profil = await this.usersService.findOneByPseudo(req.user.username);
     return profil;
   }
 

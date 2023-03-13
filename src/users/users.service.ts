@@ -43,16 +43,6 @@ export class UsersService {
     return undefined;
   }
 
-  async findOneUser(pseudo: string) {
-    const user = await User.find({
-      relations: { animal: true },
-      where: { pseudo: pseudo },
-    });
-    console.log(user);
-
-    return user;
-  }
-
   async findOneByEmail(email: string) {
     const userMail = await User.findOne({ where: { email: email } });
 
