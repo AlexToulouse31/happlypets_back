@@ -15,6 +15,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   prenom: string;
 
   @ApiProperty()
+  @IsOptional()
   @IsString()
   nom: string;
 
