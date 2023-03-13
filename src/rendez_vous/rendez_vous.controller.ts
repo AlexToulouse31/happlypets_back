@@ -17,6 +17,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
 import { EMessageStatus, EStatus } from 'src/constants/enum';
+
 @UseInterceptors(ExcludeNullInterceptor)
 //@ApiBearerAuth()
 @ApiTags('rendez-vous')

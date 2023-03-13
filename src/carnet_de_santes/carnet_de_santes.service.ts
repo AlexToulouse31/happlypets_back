@@ -16,13 +16,12 @@ export class CarnetDeSanteService {
   }
 
   async findAllCarnet(): Promise<CarnetDeSante[] | undefined> {
-    const carnetAll = await CarnetDeSante.find({
-      relations: { animal: true },
-    });
+    const carnetAll = await CarnetDeSante.find({});
 
     if (carnetAll[0]) {
       return carnetAll;
     }
+    return undefined;
   }
 
   async findOneCarnet(id: number) {

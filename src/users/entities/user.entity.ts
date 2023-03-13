@@ -54,6 +54,6 @@ export class User extends BaseEntity {
   @Column({ type: 'varchar' })
   departement: string;
 
-  @OneToMany(() => Animal, (animal) => animal.user)
+  @OneToMany(() => Animal, (animal) => animal.user, { eager: true })
   animal: Animal;
 }

@@ -23,12 +23,32 @@ export class UsersService {
   }
 
   async findAll() {
-    const users = await User.find({ relations: { animal: true } });
+    const users = await User.find({
+      relations: {
+        animal: {
+          rendezVous: true,
+        },
+      },
+    });
     return users;
   }
 
   async findOneByPseudo(pseudo: string) {
     const user = await User.findOne({ where: { pseudo: pseudo } });
+
+    if (user) {
+      return user;
+    }
+
+    return undefined;
+  }
+
+  async findOneUser(pseudo: string) {
+    const user = await User.find({
+      relations: { animal: true },
+      where: { pseudo: pseudo },
+    });
+    console.log(user);
 
     return user;
   }
@@ -50,17 +70,18 @@ export class UsersService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
+    await User.update(id, updateUserDto);
+
     const newUser = await User.findOneBy({
       id: id,
     });
-    newUser.pseudo = updateUserDto.pseudo;
-    newUser.adresse = updateUserDto.adresse;
-    newUser.ville = updateUserDto.ville;
-    newUser.codepostal = updateUserDto.codepostal;
-    newUser.departement = updateUserDto.departement;
 
-    await User.save(newUser);
+    return newUser;
+  }
 
-    return await User.findOneBy({ id: id });
+  async delete(id: number) {
+    const deleteUser = await User.findOneBy({ id: id });
+    User.remove(deleteUser);
+    return deleteUser;
   }
 }

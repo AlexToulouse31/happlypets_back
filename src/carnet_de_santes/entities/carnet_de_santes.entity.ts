@@ -4,6 +4,7 @@ import {
   BaseEntity,
   Column,
   Entity,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -25,6 +26,6 @@ export class CarnetDeSante extends BaseEntity {
   @OneToMany(() => RendezVous, (rendezVous) => rendezVous.carnetDeSante)
   rendezVous: RendezVous[];
 
-  @OneToOne(() => Animal, (animal) => animal.user)
+  @ManyToOne(() => Animal, (animal) => animal.carnetdesante)
   animal: Animal;
 }
