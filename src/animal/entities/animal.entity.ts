@@ -54,6 +54,10 @@ export class Animal extends BaseEntity {
   lof: boolean;
 
   @ApiProperty()
+  @Column({ type: 'boolean', default: false })
+  profil_public: boolean;
+
+  @ApiProperty()
   @ManyToMany(() => Alimentation)
   @JoinTable()
   alimentation: Alimentation[];

@@ -18,9 +18,9 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ExcludeNullInterceptor } from 'src/Interceptor/interceptor';
 import { EMessageStatus, EStatus } from 'src/constants/enum';
 @UseInterceptors(ExcludeNullInterceptor)
-@ApiBearerAuth()
+//@ApiBearerAuth()
 @ApiTags('rendez-vous')
-@UseGuards(JwtAuthGuard)
+//@UseGuards(JwtAuthGuard)
 @Controller('rendez-vous')
 export class RendezVousController {
   constructor(private readonly rendezVousService: RendezVousService) {}

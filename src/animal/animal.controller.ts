@@ -17,14 +17,13 @@ import { AnimalService } from './animal.service';
 import { CreateAnimalDto } from './dto/create-animal.dto';
 import { UpdateAnimalDto } from './dto/update-animal.dto';
 
-@UseGuards(JwtAuthGuard)
-@ApiBearerAuth()
+//@UseGuards(JwtAuthGuard)
+//@ApiBearerAuth()
 @ApiTags('animal')
 @Controller('animal')
 export class AnimalController {
   constructor(private readonly animalService: AnimalService) {}
 
-  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createAnimalDto: CreateAnimalDto, @Request() req) {
     const user_id = req.user.userId;
@@ -43,7 +42,6 @@ export class AnimalController {
     };
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
     const allAnimals = await this.animalService.findAll();
@@ -54,7 +52,6 @@ export class AnimalController {
     };
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('nom')
   async findOne(@Body('nom') nom: string) {
     const findAnimalByName = await this.animalService.findOne(nom);
@@ -72,7 +69,6 @@ export class AnimalController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get(':id')
   async findOneById(@Param('id') id: string) {
     const findAnimalById = await this.animalService.findOneById(+id);
@@ -90,7 +86,6 @@ export class AnimalController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -104,7 +99,6 @@ export class AnimalController {
     };
   }
 
-  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: string) {
     const data = await this.animalService.findOneById(+id);
