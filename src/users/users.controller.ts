@@ -83,12 +83,13 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Patch()
   async update(@Body() updateUserDto: UpdateUserDto, @Request() req) {
-    const userLogged = req.user.id;
+    const userLogged = req.user.userId;
 
     const userUpdate = await this.usersService.update(
       userLogged,
       updateUserDto,
     );
+    //console.log('apres update', userUpdate);
 
     return {
       statusCode: 201,

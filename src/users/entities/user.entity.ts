@@ -5,6 +5,7 @@ import {
   BaseEntity,
   Column,
   Entity,
+  JoinColumn,
   OneToMany,
   PrimaryGeneratedColumn,
   Unique,
@@ -47,7 +48,7 @@ export class User extends BaseEntity {
   ville: string;
 
   @ApiProperty()
-  @Column({ type: 'integer' })
+  @Column({ type: 'varchar' })
   codepostal: string;
 
   @ApiProperty()
@@ -55,9 +56,14 @@ export class User extends BaseEntity {
   departement: string;
 
   @ApiProperty()
-  @Column({ type: 'bytea', nullable: true })
+  @Column({ type: 'boolean', default: false })
+  admin: boolean;
+
+  @ApiProperty()
+  @Column({ type: 'varchar', nullable: true })
   avatar: string;
 
-  @OneToMany(() => Animal, (animal) => animal.user, { eager: true })
-  animal: Animal;
+  @OneToMany(() => Animal, (animal) => animal.user)
+  @JoinColumn()
+  animal: Animal[];
 }

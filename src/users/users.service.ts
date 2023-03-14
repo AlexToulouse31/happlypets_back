@@ -34,7 +34,15 @@ export class UsersService {
   }
 
   async findOneByPseudo(pseudo: string) {
-    const user = await User.findOne({ where: { pseudo: pseudo } });
+    const user = await User.findOne({
+      where: { pseudo: pseudo },
+      relations: {
+        animal: {
+          rendezVous: true,
+          carnetdesante: true,
+        },
+      },
+    });
 
     if (user) {
       return user;
@@ -60,13 +68,33 @@ export class UsersService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    await User.update(id, updateUserDto);
+    const dataInit = await User.findOneBy({ id });
+    const newData = Object.fromEntries(
+      Object.entries(updateUserDto).filter((data) => !data.includes('animal')),
+    );
+    console.log('log sans animal', newData);
 
-    const newUser = await User.findOneBy({
-      id: id,
+    const newKeys = Object.keys(updateUserDto).filter(
+      (data) => data !== 'animal',
+    );
+    let cpt = 0;
+
+    while (cpt > newKeys.length) {
+      cpt++;
+    }
+    const data = await User.update(id, newData);
+
+    const newUser = await User.find({
+      where: { id },
+      relations: {
+        animal: {
+          rendezVous: true,
+          carnetdesante: true,
+        },
+      },
     });
 
-    return newUser;
+    return newUser[0];
   }
 
   async delete(id: number) {

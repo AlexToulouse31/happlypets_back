@@ -46,7 +46,7 @@ export class AlimentationsController {
   async findAll() {
     const data = await this.alimentationsService.findAll();
 
-    if (!data[0]) {
+    if (!data) {
       throw new NotFoundException(EMessageStatus.NoData);
     }
     return {

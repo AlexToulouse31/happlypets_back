@@ -6,6 +6,7 @@ import {
   IsPostalCode,
   IsOptional,
 } from 'class-validator';
+import { Animal } from 'src/animal/entities/animal.entity';
 import { CreateUserDto } from './create-user.dto';
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {
@@ -37,7 +38,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  addresse: string;
+  adresse: string;
 
   @ApiProperty()
   @IsOptional()
@@ -58,4 +59,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsOptional()
   @IsBoolean()
   admin: boolean;
+
+  /* @IsOptional()
+  animal: Animal[]; */
 }
