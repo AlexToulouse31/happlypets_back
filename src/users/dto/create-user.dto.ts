@@ -4,6 +4,8 @@ import {
   IsEmail,
   IsNotEmpty,
   IsPostalCode,
+  IsOptional,
+  IsBoolean,
 } from 'class-validator';
 
 export class CreateUserDto {
@@ -51,4 +53,13 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   departement: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsBoolean()
+  admin: boolean;
+
+  @ApiProperty()
+  @IsOptional()
+  avatar: string;
 }
