@@ -24,8 +24,8 @@ export class UpdateAnimalDto extends PartialType(CreateAnimalDto) {
 
   @ApiProperty()
   @IsOptional()
-  @IsBoolean()
-  genre: boolean;
+  @IsString()
+  genre: string;
 
   @ApiProperty()
   @IsOptional()

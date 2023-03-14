@@ -29,8 +29,8 @@ export class CreateAnimalDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsBoolean()
-  genre: boolean;
+  @IsString()
+  genre: string;
 
   @ApiProperty()
   @IsOptional()

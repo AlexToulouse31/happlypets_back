@@ -42,8 +42,8 @@ export class Animal extends BaseEntity {
   race: string;
 
   @ApiProperty()
-  @Column({ type: 'boolean' })
-  genre: boolean;
+  @Column({ type: 'varchar' })
+  genre: string;
 
   @ApiProperty()
   @Column({ type: 'date', default: null })

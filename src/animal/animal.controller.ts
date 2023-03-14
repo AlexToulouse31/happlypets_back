@@ -37,6 +37,15 @@ export class AnimalController {
         message: 'Cet animal existe déja !!',
       };
     }
+    if (
+      createAnimalDto.genre !== 'Femelle' &&
+      createAnimalDto.genre !== 'Mâle'
+    ) {
+      return {
+        status: EStatus.ERROR,
+        message: 'Selectionnez un genre valide!!',
+      };
+    }
     const newPet = await this.animalService.create(createAnimalDto, user_id);
     return {
       status: EStatus.OK,
